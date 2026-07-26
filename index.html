@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Making of Everything &mdash; The Story of Chemical Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg1:#05171A;--bg2:#08252A;--bg3:#06181C;
+    --glow:rgba(70,199,192,.12);--cover-glow:rgba(224,138,60,.45);
+    --crimson:#E08A3C;--crimson-lite:#F2B166;--crimson-deep:#B36A28;
+    --gold:#E4C877;--gold-lite:#F0D896;--vital:#46C7C0;--vital-lite:#6FE0DA;
+    --cloud:#F5F7FA;--panel:#FAF7F0;--ink:#10262A;--ink-soft:#40595e;
+    --line:rgba(255,255,255,.14);--shadow:0 18px 44px rgba(20,4,10,.5);
+    --hero1:#08252A;--hero2:#0F3A40;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--cloud);background:var(--bg1);
+    background-image:radial-gradient(1200px 600px at 50% -10%, var(--glow), transparent 60%),
+      linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 44%,var(--bg3) 100%);
+    min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{position:relative;z-index:2;max-width:780px;margin:0 auto;padding:0 16px 130px}
+
+  /* Cover */
+  #cover{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px;
+    background:radial-gradient(900px 520px at 50% 116%, var(--cover-glow), transparent 60%),linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 60%,var(--bg3) 100%)}
+  .cover-in{max-width:540px;animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+  .ecg-cover{width:100%;max-width:360px;height:60px;margin:0 auto 6px;display:block}
+  .ecg-cover path{fill:none;stroke:var(--crimson-lite);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;
+    stroke-dasharray:1400;stroke-dashoffset:1400;animation:trace 2.6s ease-out .3s forwards}
+  @keyframes trace{to{stroke-dashoffset:0}}
+  .cover-eyebrow{font-family:'Saira Condensed',sans-serif;letter-spacing:.34em;text-transform:uppercase;font-size:12px;color:var(--crimson-lite);margin:14px 0 6px}
+  .cover h1{font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:clamp(34px,9.5vw,58px);line-height:.96;margin:0;color:#fff}
+  .cover h1 span{color:var(--crimson-lite)}
+  .cover-sub{color:#e8cdd6;font-size:15px;line-height:1.55;margin:14px auto 4px;max-width:440px}
+  .verse{font-family:'Fraunces',Georgia,serif;font-style:italic;color:#f4e0d6;font-size:16px;line-height:1.55;margin:20px auto 2px;max-width:440px}
+  .verse b{display:block;font-family:'Saira Condensed',sans-serif;font-style:normal;font-weight:600;letter-spacing:.2em;font-size:11px;color:var(--crimson-lite);margin-top:8px;text-transform:uppercase}
+  .field{margin:18px auto 0;max-width:340px;text-align:left}
+  .field label{display:block;font-family:'Saira Condensed',sans-serif;letter-spacing:.16em;text-transform:uppercase;font-size:11px;color:#d3aeb9;margin:0 4px 6px}
+  .field input{width:100%;padding:14px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#fff;font-size:16px;font-family:inherit}
+  .field input:focus{outline:none;border-color:var(--crimson);background:rgba(255,255,255,.1)}
+  .btn{cursor:pointer;border:none;font-family:'Saira Condensed',sans-serif;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+  .btn-go{display:inline-block;margin-top:22px;padding:15px 40px;border-radius:999px;font-size:16px;color:#2a0810;background:linear-gradient(180deg,var(--crimson-lite),var(--crimson));box-shadow:0 10px 26px rgba(0,0,0,.4)}
+  .btn-go:active{transform:translateY(1px)}
+  .cover-foot{margin-top:16px;font-family:'Saira Condensed',sans-serif;letter-spacing:.16em;font-size:11px;color:#a6808c;text-transform:uppercase}
+
+  /* Hero */
+  .hero{position:relative;padding:26px 20px 22px;margin:16px 0 6px;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,var(--hero1) 0%,var(--hero2) 100%);border:1px solid var(--line);box-shadow:var(--shadow)}
+  .hero:before{content:"";position:absolute;left:-10%;right:-10%;bottom:-40%;height:80%;background:radial-gradient(closest-side, var(--cover-glow), transparent);pointer-events:none}
+  .hero-mon{position:absolute;top:0;left:0;right:0;height:44px;opacity:.5;pointer-events:none}
+  .hero-mon path{fill:none;stroke:var(--vital-lite);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .hero-top{position:relative;display:flex;align-items:center;gap:10px;z-index:2}
+  .hero-badge{font-family:'Saira Condensed',sans-serif;letter-spacing:.18em;font-size:12px;color:#f0d3db;border:1px solid rgba(255,255,255,.22);padding:5px 10px;border-radius:8px;background:rgba(0,0,0,.18)}
+  .edit{margin-left:auto;background:rgba(255,255,255,.08);border:1px solid var(--line);color:#e6ccd4;border-radius:9px;padding:7px 11px;font-size:12px;cursor:pointer;font-family:'Saira Condensed',sans-serif;letter-spacing:.12em}
+  .hero h2{position:relative;z-index:2;font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:clamp(26px,7vw,40px);line-height:1;margin:16px 0 2px}
+  .hero h2 small{display:block;font-size:13px;letter-spacing:.28em;color:var(--crimson-lite);font-weight:600;margin-bottom:5px}
+  .hero-mission{position:relative;z-index:2;font-family:'Fraunces',serif;font-style:italic;color:#f2d9c9;font-size:15px;margin-top:8px;line-height:1.5;min-height:1px}
+  .hero-mission b{color:var(--gold-lite);font-style:normal;font-weight:600}
+  .gauge{position:relative;z-index:2;margin-top:16px}
+  .gauge-top{display:flex;justify-content:space-between;align-items:baseline;font-family:'Saira Condensed',sans-serif;letter-spacing:.14em;font-size:12px;color:#e6ccd4;text-transform:uppercase}
+  .gauge-top b{color:var(--gold-lite);font-size:15px}
+  .bar{height:10px;border-radius:999px;background:rgba(0,0,0,.3);margin-top:8px;overflow:hidden;border:1px solid rgba(255,255,255,.12)}
+  .bar > i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--vital),var(--crimson-lite),var(--gold));transition:width .8s cubic-bezier(.2,.7,.2,1)}
+
+  /* Tabs */
+  .tabs{position:sticky;top:0;z-index:20;display:flex;gap:6px;padding:10px 4px;margin:8px -4px 6px;overflow-x:auto;background:linear-gradient(180deg,var(--bg1),rgba(23,9,18,.72));backdrop-filter:blur(8px);scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{flex:0 0 auto;cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.05);color:#e0c2cb;font-family:'Saira Condensed',sans-serif;font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:13px;padding:10px 14px;border-radius:11px;white-space:nowrap;transition:.2s}
+  .tab.on{background:linear-gradient(180deg,var(--crimson-lite),var(--crimson));color:#2a0810;border-color:transparent}
+  .view{display:none;animation:fade .35s ease both}
+  .view.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .lead{font-family:'Fraunces',serif;font-style:italic;font-size:16px;line-height:1.5;color:#f0e2ea;margin:14px 6px 20px}
+
+  /* Timeline (ECG spine) */
+  .era{position:relative;margin-bottom:12px}
+  .era-head{position:relative;z-index:2;display:flex;align-items:baseline;gap:12px;padding:6px 2px 12px}
+  .era-decade{font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:30px;color:var(--gold-lite);line-height:1}
+  .era-theme{font-family:'Saira Condensed',sans-serif;font-weight:600;letter-spacing:.04em;font-size:15px;color:#e9cfd8;text-transform:uppercase}
+  .beat{position:relative;padding-left:56px;margin-bottom:10px}
+  .beat .spine{position:absolute;left:20px;top:-6px;bottom:-16px;width:2px;background:linear-gradient(180deg,rgba(228,87,110,.15),var(--crimson) 40%,var(--crimson) 60%,rgba(228,87,110,.15))}
+  .beat .pulse{position:absolute;left:9px;top:16px;width:24px;height:24px;border-radius:50%;background:radial-gradient(circle at 35% 30%, var(--hero2), var(--hero1));border:2px solid var(--crimson);z-index:2}
+  .beat.read .pulse{background:linear-gradient(180deg,var(--vital-lite),var(--vital));border-color:var(--vital-lite)}
+  .beat .pulse:after{content:"";position:absolute;left:50%;top:50%;width:7px;height:7px;border-radius:50%;background:var(--crimson-lite);transform:translate(-50%,-50%)}
+  .beat.read .pulse:after{background:#0d3a33}
+  .mrow{cursor:pointer;background:var(--panel);color:var(--ink);border-radius:14px;padding:13px 15px;box-shadow:0 12px 26px rgba(20,4,10,.32);display:flex;align-items:center;gap:12px;transition:transform .12s}
+  .mrow:active{transform:scale(.99)}
+  .mrow .yr{flex:0 0 auto;font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:20px;color:var(--crimson-deep);width:46px}
+  .mrow .mtitle{flex:1;font-size:15px;line-height:1.35;font-weight:600;color:var(--ink)}
+  .mrow .tagp{display:inline-block;font-family:'Saira Condensed',sans-serif;font-weight:700;letter-spacing:.06em;font-size:10px;padding:2px 7px;border-radius:5px;margin-top:5px;text-transform:uppercase}
+  .p-us{background:rgba(196,50,75,.14);color:var(--crimson-deep)}
+  .p-int{background:rgba(63,184,160,.16);color:#1f7a6c}
+  .mrow .chev{flex:0 0 auto;color:var(--crimson-deep);font-size:24px;font-weight:700;opacity:.6}
+
+  /* Frontier / Problems cards */
+  .fcard{position:relative;cursor:pointer;background:var(--panel);color:var(--ink);border-radius:16px;padding:16px 16px 16px 58px;margin-bottom:12px;box-shadow:var(--shadow)}
+  .fcard .ic{position:absolute;left:15px;top:16px;width:30px;height:30px;font-size:19px;display:flex;align-items:center;justify-content:center}
+  .fcard h4{font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:19px;margin:0 0 3px;color:var(--ink)}
+  .fcard p{font-size:13.5px;line-height:1.5;color:#4a3038;margin:0}
+  .fcard .chev{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--crimson-deep);font-size:24px;font-weight:700;opacity:.55}
+  .ptag{display:inline-block;font-family:'Saira Condensed',sans-serif;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:10px;padding:3px 9px;border-radius:6px;margin-bottom:7px}
+  .t-open{background:rgba(228,199,119,.24);color:#8a6412}
+  .t-near{background:rgba(63,184,160,.18);color:#1f7a6c}
+
+  /* Mission tab */
+  .m-head{background:linear-gradient(180deg,var(--hero2),var(--hero1));border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:16px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .m-head:before{content:"\2699";position:absolute;top:-14px;right:6px;font-size:120px;color:rgba(255,255,255,.05);line-height:1}
+  .m-head h3{font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:25px;margin:0 0 6px;color:var(--crimson-lite)}
+  .m-head p{font-size:14.5px;line-height:1.55;color:#e6d2da;margin:0}
+  .m-current{background:rgba(228,199,119,.1);border:1px solid rgba(228,199,119,.4);border-radius:14px;padding:16px;margin-bottom:16px}
+  .m-current .lbl{font-family:'Saira Condensed',sans-serif;letter-spacing:.14em;text-transform:uppercase;font-size:11px;color:var(--gold-lite);margin-bottom:6px}
+  .m-current .val{font-family:'Fraunces',serif;font-style:italic;font-size:19px;line-height:1.4;color:#fff}
+  .m-current .val b{font-style:normal;font-weight:600;color:var(--gold-lite)}
+  .mopt{cursor:pointer;background:var(--panel);color:var(--ink);border-radius:14px;padding:15px 16px;margin-bottom:11px;box-shadow:0 12px 26px rgba(20,4,10,.3);border:2px solid transparent;transition:.15s;position:relative}
+  .mopt.sel{border-color:var(--gold);box-shadow:0 0 0 3px rgba(228,199,119,.3),0 12px 26px rgba(20,4,10,.3)}
+  .mopt h5{font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:17px;margin:0 0 3px;color:var(--ink)}
+  .mopt p{font-size:13.5px;line-height:1.45;color:#4a3038;margin:0}
+  .mopt .pick{margin-top:9px;display:inline-block;font-family:'Saira Condensed',sans-serif;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:12px;color:var(--crimson-deep)}
+  .mopt.sel .pick{color:#1f7a6c}
+  .mopt.sel .pick:before{content:"\2713 "}
+
+  /* Mentors */
+  .hero-story{position:relative;cursor:pointer;background:linear-gradient(180deg,var(--hero2),var(--hero1));border:1px solid var(--gold);border-radius:18px;padding:22px 20px;margin-bottom:20px;box-shadow:var(--shadow);overflow:hidden}
+  .hero-story:before{content:"\2697";position:absolute;top:-16px;right:2px;font-size:110px;color:rgba(228,199,119,.08);line-height:1}
+  .hs-eyebrow{font-family:'Saira Condensed',sans-serif;letter-spacing:.18em;text-transform:uppercase;font-size:11px;color:var(--gold-lite)}
+  .hero-story h3{font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:27px;margin:5px 0 7px;color:#fff}
+  .hero-story p{font-size:14.5px;line-height:1.55;color:#e9d3c8;margin:0 0 12px;max-width:92%}
+  .hs-open{font-family:'Saira Condensed',sans-serif;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:13px;color:#2a0810;background:linear-gradient(180deg,var(--gold-lite),var(--gold));padding:9px 15px;border-radius:9px;display:inline-block}
+  .mentor-h{font-family:'Saira Condensed',sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:15px;color:var(--crimson-lite);margin:6px 2px 14px}
+  .res{background:var(--panel);color:var(--ink);border-radius:15px;padding:16px 17px;margin-bottom:13px;box-shadow:var(--shadow)}
+  .res .now{font-family:'Saira Condensed',sans-serif;letter-spacing:.14em;text-transform:uppercase;font-size:11px;color:#2a0810;background:var(--gold-lite);display:inline-block;padding:4px 10px;border-radius:7px;margin-bottom:8px;font-weight:700}
+  .res h4{font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:18px;margin:0 0 2px;color:var(--ink)}
+  .res .tagline{font-family:'Saira Condensed',sans-serif;letter-spacing:.06em;font-size:12px;color:var(--crimson-deep);text-transform:uppercase;margin-bottom:8px}
+  .res p{font-size:14px;line-height:1.5;color:#3a2028;margin:0 0 10px}
+  .res .fact{font-size:13px;color:var(--ink-soft);margin:0 0 4px;padding-left:20px;position:relative}
+  .res .fact:before{content:"\2714";position:absolute;left:0;top:0;color:var(--crimson-deep)}
+  .res a{display:inline-block;margin-top:8px;font-family:'Saira Condensed',sans-serif;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:13px;color:#2a0810;text-decoration:none;background:linear-gradient(180deg,var(--gold-lite),var(--gold));padding:9px 16px;border-radius:9px}
+  .scrip{margin:8px 2px 0;padding:14px 15px;border-left:3px solid var(--crimson);background:rgba(0,0,0,.2);border-radius:0 12px 12px 0}
+  .scrip p{font-family:'Fraunces',serif;font-style:italic;font-size:15px;line-height:1.5;color:#f4e6ee;margin:0}
+  .scrip b{display:block;font-family:'Saira Condensed',sans-serif;font-style:normal;letter-spacing:.16em;font-size:11px;color:var(--crimson-lite);margin-top:7px;text-transform:uppercase}
+
+  /* Brief screen */
+  .brief-screen{position:fixed;inset:0;z-index:70;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);transform:translateX(100%);transition:transform .32s cubic-bezier(.2,.7,.2,1);display:flex;flex-direction:column}
+  .brief-screen.open{transform:none}
+  .brief-bar{flex:0 0 auto;display:flex;align-items:center;gap:12px;padding:16px 16px 10px;border-bottom:1px solid var(--line);background:rgba(0,0,0,.25)}
+  .back{background:rgba(255,255,255,.08);border:1px solid var(--line);color:#f0dae1;border-radius:10px;padding:9px 14px;font-family:'Saira Condensed',sans-serif;font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-size:13px;cursor:pointer}
+  .brief-tag{margin-left:auto;font-family:'Saira Condensed',sans-serif;font-weight:700;letter-spacing:.08em;font-size:12px;color:#2a0810;background:linear-gradient(180deg,var(--gold-lite),var(--gold));padding:5px 11px;border-radius:8px}
+  .brief-body{flex:1 1 auto;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:20px 18px 32px;max-width:780px;width:100%;margin:0 auto}
+  .brief-eyebrow{font-family:'Saira Condensed',sans-serif;letter-spacing:.16em;text-transform:uppercase;font-size:12px;color:var(--crimson-lite)}
+  .brief-title{font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:clamp(26px,7vw,38px);line-height:1.02;margin:6px 0 4px;color:#fff}
+  .brief-meta{font-family:'Saira Condensed',sans-serif;letter-spacing:.06em;font-size:12.5px;color:var(--vital-lite);text-transform:uppercase;margin-bottom:16px}
+  .blk{background:rgba(255,255,255,.055);border:1px solid var(--line);border-radius:14px;padding:15px 16px;margin-bottom:13px}
+  .blk-h{font-family:'Saira Condensed',sans-serif;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:12px;color:var(--crimson-lite);margin:0 0 9px;display:flex;align-items:center;gap:7px}
+  .blk p{margin:0;font-size:15px;line-height:1.58;color:#f0e2ea}
+  .factline{display:flex;gap:9px;align-items:flex-start;font-size:14px;color:#e8d6de;margin-bottom:7px;line-height:1.45}
+  .factline:last-child{margin-bottom:0}
+  .factline b{color:var(--gold-lite);flex:0 0 auto}
+  .q{margin-bottom:6px}
+  .q .qq{font-size:15px;font-weight:600;color:#fff;margin-bottom:9px;line-height:1.4}
+  .opt{display:block;width:100%;text-align:left;background:rgba(255,255,255,.05);border:1px solid var(--line);color:#f0e2ea;border-radius:10px;padding:11px 13px;margin-bottom:7px;font-size:14.5px;cursor:pointer;font-family:inherit;transition:.15s}
+  .opt.correct{background:rgba(63,184,160,.32);border-color:var(--vital);color:#fff}
+  .opt.wrong{background:rgba(196,50,75,.3);border-color:var(--crimson-lite)}
+  .opt:disabled{cursor:default}
+  .qex{font-size:13.5px;color:#e0c2cb;margin-top:7px;line-height:1.5;display:none}
+  .qex.show{display:block}
+  .lnk{display:inline-block;margin:0 8px 8px 0;font-family:'Saira Condensed',sans-serif;font-weight:600;letter-spacing:.05em;font-size:14px;color:#f0dae1;text-decoration:none;background:rgba(255,255,255,.06);border:1px solid var(--line);padding:10px 14px;border-radius:10px}
+  .lnk:after{content:" \2197";color:var(--gold-lite)}
+  .brief-scrip{background:rgba(0,0,0,.24);border-left:3px solid var(--crimson);border-radius:0 12px 12px 0;padding:14px 15px;margin-bottom:6px}
+  .brief-scrip p{font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:#f4e6ee;margin:0;line-height:1.55}
+  .brief-scrip b{display:block;font-family:'Saira Condensed',sans-serif;font-style:normal;letter-spacing:.14em;font-size:11px;color:var(--crimson-lite);margin-top:7px;text-transform:uppercase}
+  .say{margin-top:4px;background:none;border:1px solid var(--crimson-lite);color:var(--crimson-lite);border-radius:8px;padding:7px 13px;font-size:12px;cursor:pointer;font-family:'Saira Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase}
+  .brief-foot{flex:0 0 auto;padding:14px 16px calc(16px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:rgba(0,0,0,.3)}
+  .foot-btn{width:100%;max-width:744px;margin:0 auto;display:block;padding:15px;border-radius:13px;font-family:'Saira Condensed',sans-serif;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:15px;cursor:pointer;border:none}
+  .foot-btn.claim{color:#2a0810;background:linear-gradient(180deg,var(--gold-lite),var(--gold))}
+  .foot-btn.claimed{color:#eaf0f6;background:rgba(63,184,160,.3);border:1px solid var(--vital)}
+
+  .footer{text-align:center;margin-top:26px;font-family:'Saira Condensed',sans-serif;letter-spacing:.2em;font-size:11px;color:#8a6874;text-transform:uppercase}
+  #toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(30px);z-index:80;background:linear-gradient(180deg,var(--gold-lite),var(--gold));color:#2a0810;font-family:'Saira Condensed',sans-serif;font-weight:700;letter-spacing:.06em;padding:12px 20px;border-radius:12px;box-shadow:0 14px 30px rgba(0,0,0,.45);opacity:0;transition:.35s;font-size:14px;max-width:88%;text-align:center}
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  #cfx{position:fixed;inset:0;pointer-events:none;z-index:75}
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}.ecg-cover path{stroke-dashoffset:0}}
+</style>
+</head>
+<body>
+<section id="cover">
+  <div class="cover-in">
+    <svg class="ecg-cover" viewBox="0 0 360 60" aria-hidden="true"><path d="M0,30 Q30,8 60,30 T120,30 T180,30 T240,30 T300,30 T360,30"/></svg>
+    <div class="cover-eyebrow">The story of a profession</div>
+    <h1>THE MAKING<br><span>OF EVERYTHING</span></h1>
+    <p class="cover-sub">How chemical engineers learned to feed the world, cure it, fuel it and clothe it &mdash; and the problems still waiting for the next engineer. Made for a young builder to find his calling.</p>
+    <div class="verse">&ldquo;Through wisdom is an house builded; and by understanding it is established.&rdquo;<b>Proverbs 24:3</b></div>
+    <div class="field">
+      <label for="nm">Who is exploring today?</label>
+      <input id="nm" type="text" placeholder="Enter your name" autocomplete="off" />
+    </div>
+    <button class="btn btn-go" id="begin">Begin the journey</button>
+    <div class="cover-foot">For Joseph &amp; family &middot; Glory to God alone</div>
+  </div>
+</section>
+
+<div class="wrap" id="app" style="display:none">
+  <div class="hero">
+    <svg class="hero-mon" viewBox="0 0 780 44" preserveAspectRatio="none" aria-hidden="true"><path d="M0,22 Q45,4 90,22 T180,22 T270,22 T360,22 T450,22 T540,22 T630,22 T720,22 T810,22"/></svg>
+    <div class="hero-top"><span class="hero-badge" id="badge">&#9881; The Process</span><button class="edit" id="editBtn">Edit</button></div>
+    <h2><small>The story so far, builder</small><span id="heroName">&nbsp;</span></h2>
+    <div class="hero-mission" id="heroMission"></div>
+    <div class="gauge"><div class="gauge-top"><span>Story explored</span><b id="pct">0%</b></div><div class="bar"><i id="barFill"></i></div></div>
+  </div>
+
+  <div class="tabs" id="tabs">
+    <button class="tab on" data-v="story">The Story</button>
+    <button class="tab" data-v="frontier">The Frontier</button>
+    <button class="tab" data-v="problems">Open Problems</button>
+    <button class="tab" data-v="mentors">Mentors</button>
+    <button class="tab" data-v="mission">Your Mission</button>
+  </div>
+
+  <div class="view on" id="v-story">
+    <p class="lead">A pipeline runs down this page. Every valve is a moment that changed what humans could make &mdash; in America and around the world. Tap any one to open its story.</p>
+    <div id="timeline"></div>
+  </div>
+  <div class="view" id="v-frontier">
+    <p class="lead">Where the field is heading in the next ten years &mdash; the work Joseph will train for, and maybe lead. Tap to go deeper.</p>
+    <div id="frontierList"></div>
+  </div>
+  <div class="view" id="v-problems">
+    <p class="lead">These are the great unsolved challenges of the material world. Not dead ends &mdash; invitations. Read each one and ask: <em>could this be mine?</em></p>
+    <div id="problemList"></div>
+  </div>
+  <div class="view" id="v-mentors">
+    <p class="lead">No one builds alone. Here is a giant who walked this road &mdash; and real doors, right here in Ohio, where Joseph can find his own mentors.</p>
+    <div class="hero-story" id="carsonCard">
+      <div class="hs-eyebrow">A story to carry</div>
+      <h3>Dr. Percy Julian</h3>
+      <p>Denied a doctorate in his own country, he earned one abroad, made medicine from soybeans, and built his own laboratory. Tap to read how a man they tried to stop changed chemistry forever.</p>
+      <span class="hs-open">Read his story &#8250;</span>
+    </div>
+    <div class="mentor-h">Find your mentors</div>
+    <div id="mentorList"></div>
+    <div class="scrip" style="margin-top:6px"><p>&ldquo;Iron sharpeneth iron; so a man sharpeneth the countenance of his friend.&rdquo;</p><b>Proverbs 27:17</b></div>
+  </div>
+  <div class="view" id="v-mission">
+    <div class="m-head"><h3>Choose your mountain</h3><p>The best engineers don&rsquo;t just build &mdash; they carry a problem their whole life. Pick the one that stirs you most. It becomes your north star, from day one.</p></div>
+    <div class="m-current" id="mCurrent" style="display:none"><div class="lbl">Joseph&rsquo;s mission</div><div class="val" id="mCurrentVal"></div></div>
+    <div id="missionList"></div>
+  </div>
+  <div class="footer">The Making of Everything &middot; v1 &middot; Glory to God alone</div>
+</div>
+
+<div class="brief-screen" id="brief" aria-hidden="true">
+  <div class="brief-bar"><button class="back" id="backBtn">&larr; Back</button><span class="brief-tag" id="briefTag"></span></div>
+  <div class="brief-body" id="briefBody"></div>
+  <div class="brief-foot" id="briefFoot" style="display:none"><button class="foot-btn claim" id="claimBtn">Make this my mission</button></div>
+</div>
+<div id="toast"></div>
+<canvas id="cfx"></canvas>
+
+<script>
+function lsGet(k){try{return window.localStorage.getItem(k);}catch(e){return null;}}
+function lsSet(k,v){try{window.localStorage.setItem(k,v);}catch(e){}}
+var K={name:'me_name',read:'me_read',mission:'me_mission'};
+var state={name:'',read:{},mission:''};
+function loadState(){state.name=lsGet(K.name)||'';state.mission=lsGet(K.mission)||'';
+  try{state.read=JSON.parse(lsGet(K.read)||'{}');}catch(e){state.read={};}}
+function saveRead(){lsSet(K.read,JSON.stringify(state.read));}
+
+/* ---------------- DATA ---------------- */
+var ERAS=[
+ {decade:'1880s\u20131900s',theme:'A profession is born',beats:[
+  {id:'c1887',yr:'1887',place:'int',title:'The lectures that created a profession',
+   brief:{eyebrow:'The first blueprint',why:'George E. Davis, a British factory inspector, toured chemical plants and noticed something nobody had named: every plant, no matter what it made, used the same handful of basic steps \u2014 distilling, evaporating, filtering. In 1887\u201388 he taught twelve lectures in Manchester organising these into what became known as unit operations. That single idea turned chemistry-at-scale into an engineering discipline.',
+     facts:[['Who','George E. Davis, England'],['The idea','"Unit operations" \u2014 shared building blocks of every process'],['Why it matters','It made chemical plants designable, not guesswork']],
+     scrip:{t:'To every thing there is a season, and a time to every purpose.',r:'Ecclesiastes 3:1'}}},
+  {id:'c1888',yr:'1888',place:'us',title:'The world\u2019s first chemical engineering degree',
+   brief:{eyebrow:'America builds the school',why:'At MIT, chemistry professor Lewis M. Norton created "Course X" \u2014 the world\u2019s first four-year chemical engineering curriculum. It combined mechanical engineering with industrial chemistry. Every chemical engineering degree on earth, including the one Joseph will earn, descends from this.',
+     facts:[['Where','MIT, United States'],['What','The first 4-year chemical engineering degree'],['Later','MIT formed a full ChemE department in 1920']],
+     quiz:[{q:'What year was the first chemical engineering degree created?',opts:['1888','1925','1950'],a:0,ex:'1888, at MIT \u2014 which means the profession is younger than you might think.'}]}},
+  {id:'c1908',yr:'1908',place:'us',title:'AIChE is founded',
+   brief:{eyebrow:'The profession organises',why:'The American Institute of Chemical Engineers was founded in 1908, giving the new field a professional home, standards, and eventually the accreditation that makes a degree trustworthy. Joseph can join a student chapter in college.',
+     facts:[['Founded','June 1908'],['Today','The global home of chemical engineers'],['For students','Chem-E Car competition and student chapters']]}},
+  {id:'c1907',yr:'1907\u201310',place:'us',title:'Bakelite \u2014 the first true plastic',
+   brief:{eyebrow:'A new kind of matter',why:'Leo Baekeland created Bakelite, the first fully synthetic plastic, and production began around 1910. Suddenly humans could design materials that had never existed in nature \u2014 and chemical engineers had to build the plants to make them.',
+     facts:[['What','The first fully synthetic plastic'],['Used for','Electrical insulation, radios, handles, jewellery'],['Opened','The entire age of engineered materials']]}}
+ ]},
+ {decade:'1910s\u201320s',theme:'Feeding the world',beats:[
+  {id:'c1910',yr:'1910\u201313',place:'int',title:'Haber\u2013Bosch \u2014 bread from air',
+   brief:{eyebrow:'The most important process ever built',why:'Fritz Haber found how to pull nitrogen from the air and turn it into ammonia; Carl Bosch did the far harder job of making it work at industrial scale, inventing high-pressure reactors and new metallurgy to survive the conditions. The result was cheap fertiliser. It is commonly estimated that synthetic fertiliser from this process supports a very large share of the world\u2019s food supply \u2014 billions of people are alive because of it.',
+     facts:[['Who','Fritz Haber (chemistry) and Carl Bosch (engineering)'],['Where','BASF, Ludwigshafen, Germany'],['Impact','Fertiliser that feeds a huge share of humanity'],['Nobel','Haber 1918; Bosch 1931']],
+     quiz:[{q:'What does the Haber\u2013Bosch process make from air?',opts:['Plastic','Ammonia for fertiliser','Gasoline'],a:1,ex:'Ammonia \u2014 the basis of synthetic fertiliser. It is often called the process that feeds the world.'}],
+     scrip:{t:'He giveth food to all flesh: for his mercy endureth for ever.',r:'Psalm 136:25'}}},
+  {id:'c1913',yr:'1913',place:'us',title:'Cracking crude \u2014 more fuel from every barrel',
+   brief:{eyebrow:'The petroleum century begins',why:'William Burton patented a thermal cracking process that broke heavy oil molecules into lighter ones, roughly doubling the gasoline available from a barrel of crude. It launched the petroleum refining industry that chemical engineers would run for the next hundred years.',
+     facts:[['Who','William Burton, Standard Oil'],['What','Breaking big molecules into useful fuel'],['Result','The modern refinery']]}},
+  {id:'c1923',yr:'1920\u201323',place:'us',title:'The textbook that defined the field',
+   brief:{eyebrow:'Theory catches up',why:'MIT formed a separate Department of Chemical Engineering in 1920, and in 1923 Lewis, Walker and McAdams published Principles of Chemical Engineering \u2014 the book that put real mathematics behind unit operations. From then on engineers could calculate a plant instead of guessing at it.',
+     facts:[['1920','MIT creates a standalone ChemE department'],['1923','Principles of Chemical Engineering published'],['Effect','Design by calculation, not trial and error']]}}
+ ]},
+ {decade:'1930s\u201340s',theme:'Materials and medicine at scale',beats:[
+  {id:'c1935',yr:'1935\u201338',place:'us',title:'Nylon \u2014 a fibre invented from scratch',
+   brief:{eyebrow:'Designing matter',why:'Wallace Carothers and his team at DuPont created nylon, the first commercially successful synthetic fibre. Chemical engineers then had to design the reactors and spinning processes to make it by the ton. Parachutes, ropes, stockings and countless modern materials followed.',
+     facts:[['Where','DuPont, United States'],['Why it mattered','Proof that useful materials could be invented, not just found']]}},
+  {id:'c1942',yr:'1936\u201342',place:'us',title:'Catalytic cracking \u2014 the reactor that won a war',
+   brief:{eyebrow:'Chemistry at industrial scale',why:'Eugene Houdry\u2019s catalytic cracking, and then fluid catalytic cracking in 1942, used catalysts to convert crude oil into high-octane aviation fuel far more efficiently. It is often credited with giving Allied aircraft a decisive fuel advantage in the Second World War. The fluidised-bed reactor remains one of chemical engineering\u2019s masterpieces.',
+     facts:[['1942','Fluid catalytic cracking begins operating'],['Impact','High-octane aviation fuel at massive scale'],['Legacy','Fluidised beds still used in refineries worldwide']]}},
+  {id:'c1944',yr:'1940s',place:'us',title:'Penicillin \u2014 medicine made by the ton',
+   brief:{eyebrow:'The birth of biochemical engineering',why:'Fleming discovered penicillin, but discovery is not supply. Chemical engineers solved how to grow mould in enormous deep tanks and purify the drug at scale. Margaret Hutchinson Rousseau \u2014 the first woman to earn a chemical engineering doctorate at MIT \u2014 designed the first commercial penicillin production plant. Millions of lives were saved because engineers made the medicine manufacturable.',
+     facts:[['The problem','A cure nobody could produce in quantity'],['The solution','Deep-tank fermentation and large-scale purification'],['Pioneer','Margaret Hutchinson Rousseau designed the first commercial plant'],['Born here','Biochemical engineering as a discipline']],
+     scrip:{t:'I will restore health unto thee, and I will heal thee of thy wounds.',r:'Jeremiah 30:17'}}}
+ ]},
+ {decade:'1950s\u201370s',theme:'The age of plastics and safety',beats:[
+  {id:'c1955',yr:'1950s',place:'int',title:'Plastics for everyone',
+   brief:{eyebrow:'The material age',why:'New catalysts developed by Karl Ziegler and Giulio Natta made it possible to produce polyethylene and polypropylene cheaply and at scale, earning them the 1963 Nobel Prize. Chemical engineers built the plants \u2014 and plastic became the defining material of modern life, for better and for worse.',
+     facts:[['Nobel','Ziegler and Natta, 1963'],['Result','Cheap, mass-produced plastics'],['The shadow','The plastic waste problem we now must solve']]}},
+  {id:'c1960',yr:'1960s',place:'us',title:'Making drinkable water from the sea',
+   brief:{eyebrow:'Separating the impossible',why:'Reverse osmosis membranes made it practical to push seawater through a filter fine enough to remove salt. Today desalination plants supply fresh water to entire cities in dry countries \u2014 pure chemical engineering, applied to human survival.',
+     facts:[['What','Membranes that separate salt from water'],['Today','Whole cities drink desalinated seawater']]}},
+  {id:'c1984',yr:'1974 & 1984',place:'int',title:'Flixborough and Bhopal \u2014 safety becomes sacred',
+   brief:{eyebrow:'The hardest lessons',why:'An explosion at Flixborough in England in 1974, and the catastrophic gas release at Bhopal, India in 1984 which killed thousands, forced the profession to change. Process safety became a central discipline, not an afterthought. Every chemical engineer today is trained to design for what happens when things go wrong \u2014 because people\u2019s lives sit downstream of their calculations.',
+     facts:[['Flixborough','United Kingdom, 1974'],['Bhopal','India, 1984 \u2014 one of history\u2019s worst industrial disasters'],['The change','Process safety became core to the profession']],
+     scrip:{t:'When thou buildest a new house, then thou shalt make a battlement for thy roof.',r:'Deuteronomy 22:8'}}}
+ ]},
+ {decade:'1980s\u20132000s',theme:'Cleaner and smarter',beats:[
+  {id:'c1991',yr:'1991',place:'int',title:'The lithium-ion battery goes commercial',
+   brief:{eyebrow:'Power you can carry',why:'Sony commercialised the lithium-ion battery in 1991. The chemistry came from researchers, but turning it into a safe, cheap, mass-manufactured product was chemical and materials engineering. Every phone, laptop and electric car depends on it.',
+     facts:[['1991','First commercial lithium-ion battery'],['Now','Phones, laptops, EVs, grid storage']]}},
+  {id:'c1998',yr:'1998',place:'us',title:'Green chemistry \u2014 designing out the harm',
+   brief:{eyebrow:'A conscience for the field',why:'Paul Anastas and John Warner published the twelve principles of green chemistry: prevent waste, use safer solvents, design for degradation, use renewable feedstocks. It reframed the goal from "does it work?" to "does it work without harming creation?"',
+     facts:[['The shift','Prevent pollution rather than treat it'],['12 principles','A design framework still taught today']],
+     scrip:{t:'The earth is the LORD\u2019S, and the fulness thereof.',r:'Psalm 24:1'}}}
+ ]},
+ {decade:'2020s',theme:'The new frontier',beats:[
+  {id:'c2020',yr:'2020',place:'int',title:'Vaccines manufactured at record speed',
+   brief:{eyebrow:'Scale-up under pressure',why:'When mRNA vaccines were developed, the bottleneck was manufacturing \u2014 particularly the lipid nanoparticles that carry the mRNA safely into cells. Chemical and bioprocess engineers scaled production from laboratory batches to billions of doses in an extraordinarily short time.',
+     facts:[['The challenge','Lab science to billions of doses'],['The heroes','Process and bioprocess engineers'],['Lesson','Discovery is only half; manufacturing is the other half']]}},
+  {id:'c2024',yr:'2020s',place:'us',title:'Carbon capture, hydrogen and the energy shift',
+   brief:{eyebrow:'The work of this generation',why:'Capturing carbon dioxide from industry and air, producing clean hydrogen, and building battery gigafactories are all fundamentally chemical engineering problems: separations, reactions, catalysts and scale. This is the frontier Joseph will graduate into.',
+     facts:[['Carbon capture','Separating CO2 from flue gas and air'],['Hydrogen','Clean fuel from water using electricity'],['Batteries','Gigafactories need process engineers']]}},
+  {id:'c2026',yr:'2020s',place:'int',title:'AI joins the laboratory',
+   brief:{eyebrow:'A new tool, not a replacement',why:'AI now helps predict new materials, optimise plant operations, and cut energy use. It does not build plants, judge safety, or take responsibility for lives downstream \u2014 which is why AI makes a good chemical engineer more powerful, not less needed.',
+     facts:[['What AI does well','Prediction, optimisation, screening ideas'],['What engineers do','Judgement, safety, physical reality, responsibility']],
+     scrip:{t:'For the LORD giveth wisdom: out of his mouth cometh knowledge and understanding.',r:'Proverbs 2:6'}}}
+ ]}
+];
+var FRONTIER=[
+ {id:'f-h2',ic:'\ud83d\udca7',tag:'Near',tagc:'t-near',h:'Green hydrogen & clean fuels',p:'Splitting water with clean electricity to make fuel that burns without carbon.',
+  brief:{eyebrow:'The next ten years',why:'Hydrogen can power heavy industry and transport without carbon emissions \u2014 if engineers can make it cheaply and move it safely. That is a chemical engineering problem in every direction.'}},
+ {id:'f-co2',ic:'\ud83c\udf2c\ufe0f',tag:'Near',tagc:'t-near',h:'Carbon capture',p:'Pulling carbon dioxide out of smokestacks \u2014 and out of the open air.',
+  brief:{eyebrow:'The next ten years',why:'Separating one gas from a mixture is classic chemical engineering. Doing it cheaply enough to matter at planetary scale is the hard part, and it is wide open work.'}},
+ {id:'f-bat',ic:'\ud83d\udd0b',tag:'Near',tagc:'t-near',h:'Batteries & energy storage',p:'Gigafactories and new chemistries to store the world\u2019s power.',
+  brief:{eyebrow:'The next ten years',why:'Renewable energy is useless without storage. Battery manufacturing is one of the fastest-growing employers of chemical and materials engineers.'}},
+ {id:'f-plastic',ic:'\u267b\ufe0f',tag:'Open',tagc:'t-open',h:'Recyclable & degradable plastics',p:'Materials designed from the start to be un-made and used again.',
+  brief:{eyebrow:'The next ten years',why:'Chemical recycling breaks plastics back into their building blocks so they can be remade. Making it work economically at scale is a major unsolved challenge.'}},
+ {id:'f-bio',ic:'\ud83e\uddec',tag:'Near',tagc:'t-near',h:'Biomanufacturing',p:'Engineering living cells as tiny factories for medicines, fuels and materials.',
+  brief:{eyebrow:'The next ten years',why:'Synthetic biology lets engineers program microbes to produce valuable molecules. Scaling those cultures into reliable factories is bioprocess engineering.'}},
+ {id:'f-ai',ic:'\ud83e\udde0',tag:'Near',tagc:'t-near',h:'AI-designed materials & processes',p:'Machines that propose new molecules and tune whole plants in real time.',
+  brief:{eyebrow:'The next ten years',why:'AI can screen millions of candidate materials and optimise operating conditions. Engineers who use it well will design better plants faster than anyone before them.'}}
+];
+var PROBLEMS=[
+ {id:'p-plastic',ic:'\u267b\ufe0f',tag:'Unsolved',tagc:'t-open',h:'We make plastic faster than we can unmake it',p:'Only a small fraction is truly recycled; the rest becomes waste that outlives us.',
+  brief:{eyebrow:'An invitation',why:'Chemical engineers helped give the world cheap plastic. Cleaning it up is now one of the field\u2019s great unfinished tasks: designing materials that degrade safely, and recycling that actually works at industrial scale.',
+    facts:[['The problem','Most plastic is never truly recycled'],['The work','Chemical recycling and degradable materials']],
+    scrip:{t:'The earth is the LORD\u2019S, and the fulness thereof.',r:'Psalm 24:1'}}},
+ {id:'p-carbon',ic:'\ud83c\udfed',tag:'Unsolved',tagc:'t-open',h:'Heavy industry still runs on carbon',p:'Cement, steel and ammonia are essential \u2014 and very hard to make cleanly.',
+  brief:{eyebrow:'An invitation',why:'These industries feed and house the world, but their processes release enormous carbon dioxide. Redesigning them to run clean is one of the biggest engineering challenges of the century \u2014 and it is chemical engineering work.',
+    facts:[['The hard cases','Cement, steel, ammonia'],['The prize','Keep the products, remove the emissions']]}},
+ {id:'p-water',ic:'\ud83d\udeb0',tag:'Solvable',tagc:'t-near',h:'Clean water is still out of reach for many',p:'Hundreds of millions lack safely managed drinking water.',
+  brief:{eyebrow:'An invitation',why:'Membranes, filtration and desalination are chemical engineering. Making them cheap and rugged enough for villages, not just wealthy cities, would change millions of lives \u2014 including across Africa.',
+    facts:[['The tools','Membranes, filtration, desalination'],['The need','Low-cost systems for places with little infrastructure']],
+    scrip:{t:'Whosoever drinketh of the water that I shall give him shall never thirst.',r:'John 4:14'}}},
+ {id:'p-fert',ic:'\ud83c\udf3e',tag:'Paradox',tagc:'t-open',h:'The fertiliser paradox',p:'Haber\u2013Bosch feeds billions \u2014 and consumes enormous energy doing it.',
+  brief:{eyebrow:'An invitation',why:'The process that feeds much of humanity is also energy-hungry and emissions-heavy, and fertiliser runoff damages rivers. Finding a cleaner way to fix nitrogen would be a Nobel-scale contribution.',
+    facts:[['The good','It feeds a vast share of the world'],['The cost','High energy use and runoff pollution'],['The prize','Clean nitrogen fixation']]}},
+ {id:'p-med',ic:'\ud83d\udc8a',tag:'Justice',tagc:'t-open',h:'Medicine the poor cannot afford',p:'Cures exist that many nations still cannot manufacture or buy.',
+  brief:{eyebrow:'An invitation',why:'Manufacturing cost decides who gets treated. Engineers who make drug production cheaper and possible in more countries \u2014 including Nigeria and across Africa \u2014 save lives just as surely as those who discover the cure.',
+    facts:[['The gap','Discovery happens in a few places; need is everywhere'],['The work','Cheaper, local, reliable manufacturing']],
+    scrip:{t:'Freely ye have received, freely give.',r:'Matthew 10:8'}}},
+ {id:'p-energy',ic:'\u26a1',tag:'Unsolved',tagc:'t-open',h:'Storing energy for a whole grid',p:'The sun sets and the wind stops \u2014 and we still cannot store enough.',
+  brief:{eyebrow:'An invitation',why:'Grid-scale storage is the missing piece of clean energy. New battery chemistries and other storage methods need engineers who can scale them safely and affordably.',
+    facts:[['The gap','Renewables are intermittent'],['The prize','Cheap, safe, enormous storage']]}}
+];
+var MISSIONS=[
+ {id:'plastic',h:'I will end plastic waste',p:'Design materials and recycling that let us keep the benefits without poisoning creation.',line:'to end plastic waste \u2014 designing materials the earth can receive back.'},
+ {id:'carbon',h:'I will decarbonise industry',p:'Make cement, steel and chemicals without wrecking the air.',line:'to clean the air \u2014 rebuilding industry so it no longer costs the earth.'},
+ {id:'water',h:'I will bring clean water to everyone',p:'Build filtration and desalination cheap enough for every village.',line:'to bring clean water to every village that still has none.'},
+ {id:'energy',h:'I will power the world cleanly',p:'Batteries, hydrogen and storage that make clean energy work all day and night.',line:'to power the world cleanly \u2014 storing light for the darkest hours.'},
+ {id:'food',h:'I will feed the world sustainably',p:'Find a cleaner way to make the fertiliser billions depend on.',line:'to feed the world without burning it \u2014 clean fertiliser for a hungry planet.'},
+ {id:'med',h:'I will make medicine reachable',p:'Manufacture life-saving drugs cheaply, and in the countries that need them.',line:'to put medicine within reach of every family that cannot afford it.'}
+];
+var PMAP={'p-plastic':'plastic','p-carbon':'carbon','p-water':'water','p-fert':'food','p-med':'med','p-energy':'energy'};
+var CARSON={name:'Dr. Percy Julian',role:'The chemist they tried to stop',
+ brief:{eyebrow:'A story to carry',
+  why:'Percy Lavon Julian was born in Montgomery, Alabama in 1899, the grandson of enslaved people, at a time when his state offered him almost no path to higher education. He entered DePauw University as a "sub-freshman" \u2014 required to take high-school classes at night while carrying college courses by day \u2014 and graduated in 1920 at the very top of his class. American universities still refused to let him pursue a doctorate, so he earned his PhD in Vienna. He went on to synthesise medicines from ordinary soybeans, including the work that helped make the arthritis drug cortisone affordable to ordinary people rather than a luxury for the rich. He founded his own company, Julian Laboratories \u2014 becoming an employer of labour \u2014 and was later elected to the National Academy of Sciences and the National Inventors Hall of Fame. His home was firebombed by people who did not want him in their neighbourhood, and he kept working anyway. Doors were shut in his face his entire life. He built new ones.',
+  facts:[['Born','1899, Montgomery, Alabama \u2014 grandson of enslaved people'],['The obstacle','Denied a doctorate in America; earned it in Vienna'],['The work','Medicines synthesised from soybeans; helped make cortisone affordable'],['The vision','Founded Julian Laboratories \u2014 his own company'],['The honour','National Academy of Sciences; National Inventors Hall of Fame']],
+  quiz:[{q:'What everyday crop did Percy Julian turn into medicine?',opts:['Soybeans','Corn','Cotton'],a:0,ex:'Soybeans. He found how to make valuable steroid medicines from them \u2014 chemistry turned into affordable healing.'}],
+  scrip:{t:'The stone which the builders refused is become the head stone of the corner.',r:'Psalm 118:22'}}};
+var MENTORS=[
+ {now:'Start here',h:'NSBE Jr \u2014 for high schoolers',tag:'Mentorship \u00b7 pre-college',p:'The National Society of Black Engineers runs a pre-college programme for students in Joseph\u2019s age group, with mentorship, competitions, and a community of young engineers. This is the best first door to knock on right now.',facts:['Built for pre-college students','Mentors, scholarships, competitions'],href:'https://www.nsbe.org/precollege',cta:'See NSBE Jr'},
+ {h:'AIChE & the Chem-E Car challenge',tag:'The profession',p:'The American Institute of Chemical Engineers is the field\u2019s home. Its Chem-E Car contest has students build a car powered and stopped by chemical reactions \u2014 exactly the kind of thing that makes a teenager fall in love with the field.',facts:['Student chapters everywhere','Build, compete, network'],href:'https://www.aiche.org',cta:'Explore AIChE'},
+ {now:'Summer',h:'Ohio engineering summer camps',tag:'Do this summer',p:'Ohio State, Cincinnati, Akron and other Ohio universities run summer engineering programmes for high-school students \u2014 a week or two on campus doing real engineering, close to home.',facts:['On real engineering campuses','Often designed for grades 9\u201312'],href:'https://engineering.osu.edu/k-12-outreach',cta:'See OSU outreach'},
+ {h:'FIRST Robotics & Science Olympiad',tag:'Build now',p:'Nothing signals a future engineer like a track record of making things. Robotics teams and science competitions teach teamwork, deadlines, and problem solving \u2014 and colleges notice.',facts:['Hands-on building','Strong for applications'],href:'https://www.firstinspires.org',cta:'Find a team'},
+ {h:'Ohio\u2019s chemical industry',tag:'Where this leads',p:'Ohio is full of employers who hire chemical engineers: P&G in Cincinnati, Sherwin-Williams in Cleveland, Marathon Petroleum in Findlay, Lubrizol, Goodyear in Akron, Owens Corning in Toledo, and Battelle in Columbus.',facts:['Consumer goods, coatings, energy, polymers','Strong internship pipelines'],href:'https://www.pgcareers.com',cta:'See P&G careers'},
+ {h:'How to find a mentor of your own',tag:'Do this now',p:'Programmes are powerful, but one real mentor changes a life. Ask your science teacher who they know. Ask at church. Ask your parents\u2019 friends whether anyone works in engineering \u2014 then ask that person for thirty minutes and good questions.',facts:['Ask teachers, church, family network','Be curious, be reliable, say thank you'],href:'https://www.aiche.org/community/students',cta:'Student resources'}
+];
+
+/* ---------------- ENGINE ---------------- */
+function el(id){return document.getElementById(id);}
+function allBeats(){var a=[];for(var i=0;i<ERAS.length;i++){for(var j=0;j<ERAS[i].beats.length;j++){a.push(ERAS[i].beats[j]);}}return a;}
+function totalExplorable(){return allBeats().length+FRONTIER.length+PROBLEMS.length;}
+function readCount(){var n=0;for(var k in state.read){if(state.read[k]){n++;}}return n;}
+
+function renderHero(){el('heroName').innerHTML=state.name?state.name:'&nbsp;';
+  var pct=Math.round((readCount()/totalExplorable())*100);el('pct').innerHTML=pct+'%';el('barFill').style.width=pct+'%';
+  var mh=el('heroMission');
+  if(state.mission){var m=findMission(state.mission);mh.innerHTML='Mission: <b>'+m.h+'</b>';}
+  else{mh.innerHTML='<span style="color:#c99aa8">No mission chosen yet &mdash; find yours in <b style="color:#E4C877">Your Mission</b></span>';}}
+function findMission(id){for(var i=0;i<MISSIONS.length;i++){if(MISSIONS[i].id===id){return MISSIONS[i];}}return null;}
+
+function renderTimeline(){var box=el('timeline');box.innerHTML='';
+  for(var i=0;i<ERAS.length;i++){var era=ERAS[i];
+    var wrap=document.createElement('div');wrap.className='era';
+    var h='<div class="era-head"><span class="era-decade">'+era.decade+'</span><span class="era-theme">'+era.theme+'</span></div>';
+    for(var j=0;j<era.beats.length;j++){var b=era.beats[j];var rd=state.read[b.id]?' read':'';
+      var tagc=(b.place==='us')?'p-us':'p-int';var tagt=(b.place==='us')?'United States':'International';
+      h+='<div class="beat'+rd+'"><div class="spine"></div><div class="pulse"></div>'+
+         '<div class="mrow" data-id="'+b.id+'" data-kind="beat"><span class="yr">'+b.yr+'</span>'+
+         '<span class="mtitle">'+b.title+'<span class="tagp '+tagc+'">'+tagt+'</span></span><span class="chev">&#8250;</span></div></div>';}
+    wrap.innerHTML=h;box.appendChild(wrap);}
+  bindRows();}
+function renderFrontier(){var box=el('frontierList');box.innerHTML='';
+  for(var i=0;i<FRONTIER.length;i++){var f=FRONTIER[i];var rd=state.read[f.id]?'':'';
+    var d=document.createElement('div');d.className='fcard';d.setAttribute('data-id',f.id);d.setAttribute('data-kind','frontier');
+    d.innerHTML='<span class="ic">'+f.ic+'</span><span class="ptag '+f.tagc+'">'+f.tag+'</span><h4>'+f.h+'</h4><p>'+f.p+'</p><span class="chev">&#8250;</span>';
+    box.appendChild(d);}bindCards('frontierList');}
+function renderProblems(){var box=el('problemList');box.innerHTML='';
+  for(var i=0;i<PROBLEMS.length;i++){var p=PROBLEMS[i];
+    var d=document.createElement('div');d.className='fcard';d.setAttribute('data-id',p.id);d.setAttribute('data-kind','problem');
+    d.innerHTML='<span class="ic">'+p.ic+'</span><span class="ptag '+p.tagc+'">'+p.tag+'</span><h4>'+p.h+'</h4><p>'+p.p+'</p><span class="chev">&#8250;</span>';
+    box.appendChild(d);}bindCards('problemList');}
+function renderMentors(){var box=el('mentorList');box.innerHTML='';
+  for(var i=0;i<MENTORS.length;i++){var r=MENTORS[i];var f='';for(var j=0;j<r.facts.length;j++){f+='<p class="fact">'+r.facts[j]+'</p>';}
+    var d=document.createElement('div');d.className='res';
+    d.innerHTML=(r.now?'<span class="now">'+r.now+'</span>':'')+'<h4>'+r.h+'</h4><div class="tagline">'+r.tag+'</div><p>'+r.p+'</p>'+f+'<a href="'+r.href+'" target="_blank" rel="noopener">'+r.cta+' &rarr;</a>';
+    box.appendChild(d);}}
+function renderMission(){var box=el('missionList');box.innerHTML='';
+  var cur=el('mCurrent');
+  if(state.mission){var m=findMission(state.mission);cur.style.display='block';
+    el('mCurrentVal').innerHTML=(state.name?state.name:'I')+', your mission is <b>'+m.line+'</b>';}
+  else{cur.style.display='none';}
+  for(var i=0;i<MISSIONS.length;i++){var mo=MISSIONS[i];var sel=(state.mission===mo.id)?' sel':'';
+    var d=document.createElement('div');d.className='mopt'+sel;d.setAttribute('data-id',mo.id);
+    d.innerHTML='<h5>'+mo.h+'</h5><p>'+mo.p+'</p><span class="pick">'+(state.mission===mo.id?'Your mission':'Choose this')+'</span>';
+    box.appendChild(d);}
+  var opts=box.querySelectorAll('.mopt');
+  for(var k=0;k<opts.length;k++){opts[k].addEventListener('click',function(){chooseMission(this.getAttribute('data-id'));});}}
+
+function chooseMission(id){var changed=(state.mission!==id);state.mission=id;lsSet(K.mission,id);renderMission();renderHero();
+  if(changed){var m=findMission(id);bigBurst();toast('Mission set: '+m.h);safeSpeak((state.name?state.name+', ':'')+'your mission is '+m.line);}}
+
+/* Brief screen */
+var BRIEF_ID=null,BRIEF_KIND=null,PUSHED=false;
+function dataFor(id,kind){if(kind==='hero'){return CARSON;}
+  if(kind==='beat'){var bs=allBeats();for(var i=0;i<bs.length;i++){if(bs[i].id===id){return bs[i];}}}
+  if(kind==='frontier'){for(var j=0;j<FRONTIER.length;j++){if(FRONTIER[j].id===id){return FRONTIER[j];}}}
+  if(kind==='problem'){for(var k=0;k<PROBLEMS.length;k++){if(PROBLEMS[k].id===id){return PROBLEMS[k];}}}return null;}
+function openBrief(id,kind){var item=dataFor(id,kind);if(!item){return;}var b=item.brief;
+  var tag,title,meta;
+  if(kind==='hero'){tag='A story to carry';title=item.name;meta=item.role;}
+  else if(kind==='beat'){tag=(item.place==='us')?'USA':'World';title=item.title;meta=item.yr+' &middot; '+b.eyebrow;}
+  else if(kind==='frontier'){tag='Frontier';title=item.h;meta=b.eyebrow;}
+  else{tag='Open problem';title=item.h;meta=b.eyebrow;}
+  el('briefTag').innerHTML=tag;
+  el('briefBody').innerHTML='<div class="brief-eyebrow">'+b.eyebrow+'</div><h1 class="brief-title">'+title+'</h1><div class="brief-meta">'+meta+'</div>'+buildBlocks(b);
+  el('briefBody').scrollTop=0;
+  var foot=el('briefFoot');
+  if(kind==='problem'&&missionForProblem(id)){foot.style.display='block';setClaimBtn(id);}
+  else{foot.style.display='none';}
+  BRIEF_ID=id;BRIEF_KIND=kind;
+  if(kind!=='hero'){state.read[id]=true;saveRead();}
+  var sc=el('brief');sc.className='brief-screen open';sc.setAttribute('aria-hidden','false');bindQuiz();bindSay();
+  try{if(!PUSHED){history.pushState({b:1},'');PUSHED=true;}}catch(e){}}
+function closeBrief(fromPop){var sc=el('brief');sc.className='brief-screen';sc.setAttribute('aria-hidden','true');
+  BRIEF_ID=null;BRIEF_KIND=null;renderHero();renderTimeline();
+  if(!fromPop&&PUSHED){try{history.back();}catch(e){}PUSHED=false;}else{PUSHED=false;}}
+function missionForProblem(pid){return PMAP[pid];}
+function setClaimBtn(pid){var mid=missionForProblem(pid);var btn=el('claimBtn');
+  if(state.mission===mid){btn.className='foot-btn claimed';btn.innerHTML='&#10003; This is your mission';}
+  else{btn.className='foot-btn claim';btn.innerHTML='Make this my mission';}}
+function buildBlocks(b){var h='';
+  if(b.why){h+='<div class="blk"><p class="blk-h">&#10084; The story</p><p>'+b.why+'</p></div>';}
+  if(b.facts){var fh='';for(var i=0;i<b.facts.length;i++){fh+='<div class="factline"><b>'+b.facts[i][0]+':</b><span>'+b.facts[i][1]+'</span></div>';}h+='<div class="blk"><p class="blk-h">&#9873; Key facts</p>'+fh+'</div>';}
+  if(b.quiz){h+=buildQuiz(b.quiz);}
+  if(b.links){var lh='';for(var j=0;j<b.links.length;j++){lh+='<a class="lnk" href="'+b.links[j][1]+'" target="_blank" rel="noopener">'+b.links[j][0]+'</a>';}h+='<div class="blk"><p class="blk-h">&#128279; Go further</p>'+lh+'</div>';}
+  if(b.scrip){h+='<div class="brief-scrip"><p>&ldquo;'+b.scrip.t+'&rdquo;</p><b>'+b.scrip.r+'</b><button class="say" data-say="'+encodeURIComponent(b.scrip.t)+'">&#9654; Read aloud</button></div>';}
+  return h;}
+function buildQuiz(qs){var h='<div class="blk"><p class="blk-h">&#127919; Test yourself</p>';
+  for(var i=0;i<qs.length;i++){var q=qs[i];var opts='';for(var j=0;j<q.opts.length;j++){opts+='<button class="opt" data-q="'+i+'" data-o="'+j+'" data-a="'+q.a+'">'+q.opts[j]+'</button>';}
+    h+='<div class="q"><div class="qq">'+q.q+'</div>'+opts+'<div class="qex" data-ex="'+i+'">'+q.ex+'</div></div>';}
+  return h+'</div>';}
+
+function bindRows(){var rows=document.querySelectorAll('#timeline .mrow');
+  for(var i=0;i<rows.length;i++){rows[i].addEventListener('click',function(){openBrief(this.getAttribute('data-id'),'beat');});}}
+function bindCards(listId){var cards=document.querySelectorAll('#'+listId+' .fcard');
+  for(var i=0;i<cards.length;i++){cards[i].addEventListener('click',function(){openBrief(this.getAttribute('data-id'),this.getAttribute('data-kind'));});}}
+function bindQuiz(){var opts=el('briefBody').querySelectorAll('.opt');
+  for(var i=0;i<opts.length;i++){opts[i].addEventListener('click',function(){var qi=this.getAttribute('data-q');var chosen=parseInt(this.getAttribute('data-o'),10);var ans=parseInt(this.getAttribute('data-a'),10);
+    var group=el('briefBody').querySelectorAll('.opt[data-q="'+qi+'"]');
+    for(var j=0;j<group.length;j++){group[j].disabled=true;var oj=parseInt(group[j].getAttribute('data-o'),10);if(oj===ans){group[j].className='opt correct';}else if(oj===chosen){group[j].className='opt wrong';}}
+    var ex=el('briefBody').querySelector('.qex[data-ex="'+qi+'"]');if(ex){ex.className='qex show';}if(chosen===ans){burst();}});}}
+function bindSay(){var btns=el('briefBody').querySelectorAll('.say');for(var i=0;i<btns.length;i++){btns[i].addEventListener('click',function(e){e.stopPropagation();safeSpeak(decodeURIComponent(this.getAttribute('data-say')));});}}
+
+function bindTabs(){var tabs=document.querySelectorAll('#tabs .tab');
+  for(var i=0;i<tabs.length;i++){tabs[i].addEventListener('click',function(){var v=this.getAttribute('data-v');var all=document.querySelectorAll('#tabs .tab');
+    for(var j=0;j<all.length;j++){all[j].className='tab';}this.className='tab on';var views=document.querySelectorAll('.view');for(var k=0;k<views.length;k++){views[k].className='view';}el('v-'+v).className='view on';window.scrollTo(0,0);});}}
+
+function safeSpeak(txt){try{if(!('speechSynthesis' in window)){return;}window.speechSynthesis.cancel();var u=new window.SpeechSynthesisUtterance(txt);u.rate=.92;u.pitch=1.02;window.speechSynthesis.speak(u);}catch(e){}}
+var toastT=null;function toast(m){var t=el('toast');t.innerHTML=m;t.className='show';if(toastT){clearTimeout(toastT);}toastT=setTimeout(function(){t.className='';},2400);}
+var cvs,ctx,parts=[],raf=null;
+function initFx(){cvs=el('cfx');ctx=cvs.getContext('2d');resizeFx();window.addEventListener('resize',resizeFx);}
+function resizeFx(){if(!cvs){return;}cvs.width=window.innerWidth;cvs.height=window.innerHeight;}
+function spawn(n){var colors=['#E4576E','#C4324B','#E4C877','#3FB8A0','#F5F7FA'];for(var i=0;i<n;i++){parts.push({x:cvs.width/2+(Math.random()-.5)*160,y:cvs.height*.3,vx:(Math.random()-.5)*7,vy:Math.random()*-9-3,g:.24,s:Math.random()*7+4,c:colors[(Math.random()*colors.length)|0],rot:Math.random()*6,vr:(Math.random()-.5)*.4,life:70+Math.random()*30});}if(!raf){tick();}}
+function tick(){ctx.clearRect(0,0,cvs.width,cvs.height);for(var i=parts.length-1;i>=0;i--){var p=parts[i];p.vy+=p.g;p.x+=p.vx;p.y+=p.vy;p.rot+=p.vr;p.life--;
+    ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.fillStyle=p.c;ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*.55);ctx.restore();if(p.life<=0||p.y>cvs.height+30){parts.splice(i,1);}}
+  if(parts.length){raf=window.requestAnimationFrame(tick);}else{raf=null;ctx.clearRect(0,0,cvs.width,cvs.height);}}
+function burst(){spawn(24);}function bigBurst(){spawn(90);}
+
+function showApp(){el('cover').style.display='none';el('app').style.display='block';renderAll();}
+function renderAll(){renderHero();renderTimeline();renderFrontier();renderProblems();renderMentors();renderMission();}
+function begin(){var nm=el('nm').value.replace(/\s+/g,' ').trim();if(!nm){el('nm').focus();el('nm').style.borderColor='#E4576E';return;}
+  state.name=nm;lsSet(K.name,nm);showApp();toast('Welcome, '+nm+'.');}
+function init(){loadState();initFx();bindTabs();
+  el('begin').addEventListener('click',begin);
+  el('nm').addEventListener('keydown',function(e){if(e.keyCode===13){begin();}});
+  el('carsonCard').addEventListener('click',function(){openBrief('carson','hero');});
+  el('backBtn').addEventListener('click',function(){closeBrief(false);});
+  window.addEventListener('popstate',function(){if(BRIEF_ID){closeBrief(true);}});
+  el('claimBtn').addEventListener('click',function(){if(BRIEF_KIND==='problem'&&BRIEF_ID){var mid=missionForProblem(BRIEF_ID);chooseMission(mid);setClaimBtn(BRIEF_ID);}});
+  el('editBtn').addEventListener('click',function(){var nm=window.prompt('Name:',state.name);if(nm!==null&&nm.replace(/\s+/g,' ').trim()){state.name=nm.replace(/\s+/g,' ').trim();lsSet(K.name,state.name);renderHero();renderMission();}});
+  if(state.name){showApp();}}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
+</script>
+</body>
+</html>
